@@ -1,0 +1,27 @@
+_id: req_7895e1092661400c94bd6a5702532cfe
+authentication: {}
+body: {}
+created: 1591990783124
+description: ""
+headers: []
+isPrivate: false
+metaSortKey: -1591846619123
+method: POST
+modified: 1591990783124
+name: /infrastructure/deployment
+parameters:
+  - disabled: false
+    name: customer
+    value: 0729a580-2240-11e6-9eb5-0002a5d5c51b
+  - disabled: false
+    name: infrastructure
+    value: '{"storage":{"type": "nfs", "size": "40Gi", "name": "nfs01"}}'
+parentId: wrk_1e481ec7cc8a475da06bf05ec5c12387
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: "{{ base_url }}/infrastructure/deployment"

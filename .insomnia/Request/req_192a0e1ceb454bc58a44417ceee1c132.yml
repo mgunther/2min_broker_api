@@ -1,0 +1,24 @@
+_id: req_192a0e1ceb454bc58a44417ceee1c132
+authentication: {}
+body: {}
+created: 1591990783076
+description: ""
+headers: []
+isPrivate: false
+metaSortKey: -1591846619082
+method: DELETE
+modified: 1591990783076
+name: /infrastructure/suspension
+parameters:
+  - disabled: false
+    name: customer
+    value: 0729a580-2240-11e6-9eb5-0002a5d5c51b
+parentId: wrk_1e481ec7cc8a475da06bf05ec5c12387
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: "{{ base_url }}/infrastructure/suspension"

@@ -1,0 +1,14 @@
+_id: env_716e8c5fdaba4b61a39eeeb721431951
+color: null
+created: 1591990782882
+data:
+  base_path: "%7Bport%7D/api/%7BbasePath%7D"
+  host: dev.2min.com
+  scheme: https
+dataPropertyOrder: null
+isPrivate: false
+metaSortKey: 1591846619473
+modified: 1591990782882
+name: OpenAPI env
+parentId: env_5836a7add46b4ef28ccd2331178c29ec
+type: Environment

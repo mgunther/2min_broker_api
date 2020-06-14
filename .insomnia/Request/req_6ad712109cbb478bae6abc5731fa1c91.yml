@@ -1,0 +1,30 @@
+_id: req_6ad712109cbb478bae6abc5731fa1c91
+authentication: {}
+body: {}
+created: 1591990783048
+description: ""
+headers: []
+isPrivate: false
+metaSortKey: -1591846619071
+method: GET
+modified: 1591990783048
+name: /infrastructure/meta
+parameters:
+  - disabled: false
+    name: client
+    value: string
+  - disabled: false
+    name: metatype
+    value: string
+  - disabled: false
+    name: metadata
+    value: '{"storage":{"type": "nfs", "size": "40Gi", "name": "nfs01"}}'
+parentId: wrk_1e481ec7cc8a475da06bf05ec5c12387
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingFollowRedirects: global
+settingRebuildPath: true
+settingSendCookies: true
+settingStoreCookies: true
+type: Request
+url: "{{ base_url }}/infrastructure/meta"

@@ -1,0 +1,515 @@
+_id: spc_c66dcbdbbd784f28bbd055c9899df961
+contentType: yaml
+contents: >-
+  openapi: '3.0.2'
+
+  info:
+    title: 2Min Broker API specification
+    description: Broker general API specification
+    termsOfService: https://2min.com/terms
+    contact:
+      name: API Support
+      url: https://2min.com/support
+      email: contact@2min.com
+    license:
+      name: Apache 2.0
+      url: https://www.apache.org/licenses/LICENSE-2.0.html
+    version: '2.0'
+
+  security:
+    - Bearer:
+      - readOnly
+      - readWrite
+
+  servers:
+    - url: https://dev.2min.com:{port}/api/{basePath}
+      description: API development server
+      variables:
+        port:
+          enum:
+            - '443'
+            - '8443'
+          default: '443'
+        basePath:
+          default: v2
+    - url: https://stg.2min.com:{port}/api/{basePath}
+      description: API staging server
+      variables:
+        port:
+          enum:
+            - '443'
+            - '8443'
+          default: '443'
+        basePath:
+          default: v2
+    - url: https://2min.com:{port}/api/{basePath}
+      description: API production server
+      variables:
+        port:
+          enum:
+            - '443'
+            - '8443'
+          default: '443'
+        basePath:
+          default: v2
+
+  tags:
+    - name: user
+      description: Everything about Users management
+      externalDocs:
+        description: Find out more
+        url: http://2min.com
+    - name: security
+      description: Everything about Security management
+      externalDocs:
+        description: Find out more
+        url: http://2min.com    
+    - name: info
+      description: Everything about Infrastructure Metadata
+      externalDocs:
+        description: Find out more
+        url: http://2min.com
+    - name: broker
+      description: Everything about broker resources
+      externalDocs:
+        description: Find out more
+        url: http://2min.com
+
+        
+  paths:
+    # ----------
+    # BEGIN /{resource}/{element}/{verb} definitions
+    # ----------
+    /{resource}/{element}/{verb}:
+      get:
+        tags:
+          - broker
+        description: Retrieves resources data from the remote backend
+        operationId: retrieveResourceElement
+        parameters:
+          - name: resource
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ResourceType'
+          - name: element
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ElementType'
+          - name: verb
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/VerbType'
+          - name: select
+            in: query
+            required: true
+            type: string
+          - name: where
+            in: query
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '401':
+            description: Unauthorized
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '403':
+            description: Forbidden
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '404':
+            description: Not Found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '415':
+            description: Unsupported media type
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '429':
+            description: To many requests
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          'default':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+
+      post:
+        tags:
+          - broker   
+        description: Creates resources data into the remote backend
+        operationId: createResourceElement
+        parameters:
+          - name: resource
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ResourceType'
+          - name: element
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ElementType'
+          - name: verb
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/VerbType'
+          - name: data
+            in: query
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '401':
+            description: Unauthorized
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '403':
+            description: Forbidden
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '404':
+            description: Not Found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '415':
+            description: Unsupported media type
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '429':
+            description: To many requests
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          'default':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+
+      put:
+        tags:
+          - broker
+        description: Updates resources data from the remote backend
+        operationId: updateResourceElement
+        parameters:
+          - name: resource
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ResourceType'
+          - name: element
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ElementType'
+          - name: verb
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/VerbType'
+          - name: data
+            in: query
+            required: true
+            type: string
+          - name: where
+            in: query
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '401':
+            description: Unauthorized
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '403':
+            description: Forbidden
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '404':
+            description: Not Found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '415':
+            description: Unsupported media type
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '429':
+            description: To many requests
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          'default':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'   
+        
+      delete:
+        tags:
+          - broker    
+        description: Deletes resources data from the remote backend
+        operationId: deleteResourceElement
+        parameters:
+          - name: resource
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ResourceType'
+          - name: element
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/ElementType'
+          - name: verb
+            in: query
+            required: true
+            schema:
+              $ref: '#/components/schemas/VerbType'
+          - name: where
+            in: query
+            required: true
+            type: string
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '401':
+            description: Unauthorized
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '403':
+            description: Forbidden
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '404':
+            description: Not Found
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '415':
+            description: Unsupported media type
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          '429':
+            description: To many requests
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+          'default':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ApiResponse'
+    # ----------
+    # END /{resource}/{element}/{verb} definitions
+    # ----------
+
+  # --------------------------
+
+  # API components definitions
+
+  # ==========================
+
+  #
+
+  components:
+    securitySchemes:
+      Bearer:
+        type: bearer
+        flows:
+          token:
+            default: AUTH_TOKEN
+          prefix: ''
+          enabled: true
+          scopes:
+            - readOnly: read objects in your account
+            - readWrite: read and write objects in your account
+    schemas:
+      CustomerId:
+        description: Customer Identification (uuid) in the system
+        type: string
+        maxLength: 36
+        format: uuid
+        # FIXME: pattern format
+        pattern: '/^[0-9a-f]{8}\-[0-9a-f]{4}\-[1-5][0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}$/i'
+        example: '0729a580-2240-11e6-9eb5-0002a5d5c51b'
+      SuspensionType:
+        description: Infrastructure suspension type
+        type: string
+        enum:
+        - 'Not Suspended'
+        - 'Soft Suspendend'
+        - 'Hard Suspended'
+      InfrastructureInfo:
+        description: |
+          Infrastructure definition type.
+          The items can have the syntax below:
+            "name": "storage",
+            "metadata": {
+              "name": "nfs01"
+              "type": "nfs",
+              "size": "40"
+            },
+            "name": "database",
+            "metadata": {
+              "name": "appname",
+              "user": "appname"
+              "password": "apppasswd",
+              "type": "mariadb"
+            }
+        type: array
+        maxItems: 1024
+        items:
+          type: string
+          maxLength: 2048
+          # FIXME: pattern format
+          pattern: '/[0-9a-z":, {}]/gim'
+          example: '{"storage":{"type": "nfs", "size": "40Gi", "name": "nfs01"}}'
+      ApiResponse:
+        description: Broker API general response
+        type: object
+        additionalProperties: false
+        properties:
+          customer:
+            $ref: '#/components/schemas/CustomerId'
+          suspension:
+            $ref: '#/components/schemas/SuspensionType'
+          infrastructure:
+            $ref: '#/components/schemas/InfrastructureInfo'
+      ClientType:
+        description: Infrastructure access client type
+        type: string
+        enum:
+        - 'admin'
+        - 'operator'
+        - 'customer'
+        - 'other'
+      MetaType:
+        description: Infrastructure metadata type
+        type: string
+        enum:
+        - 'field'
+        - 'caption'
+        - 'translation'
+        - 'limit'
+        - 'default'
+        - 'other'
+
+      ResourceType:
+        description: Resources type. Must be used camelCased.
+        type: string
+        enum:
+        - 'metadata'
+        - 'deployment'
+        - 'suspension'
+        - 'other'
+      ElementType:
+        description: Elements type. Must be used camelCased.
+        type: string
+        enum:
+        - 'field'
+        - 'caption'
+        - 'translation'
+        - 'limit'
+        - 'default'
+        - 'other'
+      VerbType:
+        description: Verbs type. Must be used is lowercased.
+        type: string
+        enum:
+        - 'create'
+        - 'retrieve'
+        - 'update'
+        - 'delete'
+        - 'retriveAll'
+        
+
+      MetaInfo:
+        description: |
+          Infrastructure metadata information definition.
+          The items can have the syntax below:
+          {
+            "name": "storage",
+            "metadata": {}
+          },
+          {
+            "name": "database",
+            "metadata": {}
+          }
+        type: array
+        maxItems: 1024
+        items:
+          type: string
+          maxLength: 2048
+          # FIXME: pattern format
+          pattern: '/[0-9a-z"\:\,\ \{\}\[\]]/gim'
+          example: '{"storage":{"type": "nfs", "size": "40Gi", "name": "nfs01"}}'
+created: 1591990782956
+fileName: 2Min broker API v2
+modified: 1592159529864
+parentId: wrk_1e481ec7cc8a475da06bf05ec5c12387
+type: ApiSpec
